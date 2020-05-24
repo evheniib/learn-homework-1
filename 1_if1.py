@@ -19,19 +19,16 @@ def main():
     Основная функция которая принимает корректный возраст
     и возвращает результат в переменную
     """
-    switcher = True
-    while switcher is True:
-        user_str = input("Enter text")
+    while True:
+        user_age = input("Enter your age: ")
         try:
-            int(user_str)
+            user_age = int(user_age)
         except ValueError:
             print("This is not a number, pls try again")
             continue
         else:
-            user_age = int(user_str)
-            print(f"So you are {user_age}`th years old!")
             check_age(user_age)
-            switcher = False      
+            break    
     return user_age
    
 def check_age(age):
@@ -40,9 +37,9 @@ def check_age(age):
     """
     if age == 0:
         print("Thirstly you must to be born")
-    elif age in range(1,7):
+    elif age>=1 and age<=7:
         print("Probably you are child in kindergarten")
-    elif age in range(7, 16):
+    elif age>=7 and age<=16:
         print("You are student in school")
     else:
         print("In medival times after 16 years every human is adult")    
