@@ -19,13 +19,12 @@ def main(str1, str2):
     if type(str1) is str and type(str2) is str:
         if str1 == str2:
             return 1
-        elif len(str1) > len(str2) and str2 != "learn":
+        if len(str1) > len(str2) and str2 != "learn":
             return 2
-        elif str1 != str2 and str2 == "learn":
+        if str2 == "learn":
             return 3
     else:
         return 0
-        raise ValueError("Your variables are not string")
 
 
 test_var = [
