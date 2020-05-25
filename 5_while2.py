@@ -20,18 +20,14 @@ def ask_user():
         "Как дела?": "Хорошо!",
         "Что делаешь?": "Программирую"
     }
-    chat_keys = list(chat_dict.keys())
     quation = input("Спроси меня \n")
-
-    key = 0
-    while key <= len(chat_keys):
+    while True:
         try:
-            if quation == chat_keys[key]:
+            if quation in chat_dict:
                 print(chat_dict[quation])
                 quation = input("Хочешь спросить что-то еще? \n")
-                key = 0 
             else:
-                key = key + 1
+                quation = input("Такого вопроса нет, спроси что-то еще \n")
         except KeyboardInterrupt:
             print("Пока")
             break  
