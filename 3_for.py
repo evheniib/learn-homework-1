@@ -32,13 +32,13 @@ def main():
         {'school_class': '7a', 'scores': [3,2,4,5,5]},
         {'school_class': '8a', 'scores': [3,4,4,5,5]},
     ]
-    total_summary = 0
+    total_average = 0
     for s_class in students:
-        s_class["summary"] = sum(s_class["scores"])
-        total_summary += s_class["summary"] 
-        print(f"The summary score in {s_class['school_class']} is {s_class['summary']}")
-
-    print(f"The total summary is {total_summary}")
+        s_class["average"] = sum(s_class["scores"]) / len(s_class["scores"])
+        total_average += s_class["average"] 
+        print(f"The average score in {s_class['school_class']} is {s_class['average']}")
+    total_average = total_average / len(students)
+    print(f"\n The total average is {total_average}")
     
 if __name__ == "__main__":
     main()
