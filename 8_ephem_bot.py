@@ -13,7 +13,7 @@
 
 """
 import logging
-
+from datetime import datetime
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
 import ephem
 import settings
@@ -32,32 +32,27 @@ def talk_to_me(update, context):
     update.message.reply_text(text)
 
 def planet_info (update, context):
+    dt_now = datetime.now()
+    dt_now = dt_now.strftime('%Y/%m/%d')
     user_text = update.message.text.split()
     planet_dict = {
-        "Mercury": ephem.Mercury('2000/01/01'), 
-        "Venus": ephem.Venus('2000/01/01'), 
-        "Mars": ephem.Mars('2000/01/01'), 
-        "Jupiter": ephem.Jupiter('2000/01/01'), 
-        "Saturn": ephem.Saturn('2000/01/01'), 
-        "Uranus": ephem.Uranus('2000/01/01'), 
-        "Neptune": ephem.Neptune('2000/01/01')
+        "Mercury": ephem.Mercury(dt_now), 
+        "Venus": ephem.Venus(dt_now), 
+        "Mars": ephem.Mars(dt_now), 
+        "Jupiter": ephem.Jupiter(dt_now), 
+        "Saturn": ephem.Saturn(dt_now), 
+        "Uranus": ephem.Uranus(dt_now), 
+        "Neptune": ephem.Neptune(dt_now)
     }
-    planet_names = list(planet_dict.keys())
-
     if len(user_text) == 2:
         word = user_text[1].capitalize()
-        switcher = True
-        for planet in planet_names:
-            if word == planet:
-                constellation = ephem.constellation(planet_dict[planet])
-                update.message.reply_text(constellation)
-                switcher = False
-                break  
-            elif word == "Earth":
-                update.message.reply_text("Eath has no constellation")
-                switcher = False
-                break
-        if switcher == True:
+        print(word)
+        if word in planet_dict:
+            constellation = ephem.constellation(planet_dict[word])
+            update.message.reply_text(constellation) 
+        elif word == "Earth":
+            update.message.reply_text("Earth has no constellation")
+        else:
             update.message.reply_text("Wrong planet pls enter correct name of planet")
     else:
         update.message.reply_text("Wrong command. Pls type for example '/planet Mars'")
